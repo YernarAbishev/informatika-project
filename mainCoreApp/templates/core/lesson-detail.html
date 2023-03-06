@@ -1,0 +1,44 @@
+{% extends '../base.html' %}
+
+{% block title %}{{ module.moduleName }}{% endblock %}
+
+{% block content %}
+    {% if user.is_authenticated %}
+    <div class="lesson-detail">
+        <div class="container">
+            <p><a href="#">Артқа</a> / {{ module.moduleName }}</p>
+            <div class="row">
+                <div class="col-md-7">
+                    {% if lesson.videoLesson %}
+                    <div class="video-task-card">
+                        <iframe width="100%" height="450" src="{{ lesson.videoLesson }}" title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" allowfullscreen></iframe>
+                    </div>
+                    {% else %}
+                    <div class="video-task-card">
+                        <h2>{{ lesson.lessonName }}</h2>
+                        {% autoescape off %}
+                        {{ lesson.practiceLesson }}
+                        {% endautoescape %}
+                    </div>
+                    {% endif %}
+                </div>
+                <div class="col-md-5">
+                    <h2>Сабақтар</h2>
+                    {% for l in lessons %}
+                    <a href="{% url 'lessonDetail' pk=l.pk %}" class="category-filter">{{ forloop.counter }}. {{ l.lessonName }}</a>
+                    {% endfor %}
+                </div>
+            </div>
+        </div>
+    </div>
+    {% else %}
+    <div class="courses">
+        <div class="container">
+            <div class="message-danger">
+                <h1>Хабарлама</h1>
+                <p>Курстарды қарау үшін платформаға тіркеліңіз немесе кіріңіз</p>
+            </div>
+        </div>
+    </div>
+    {% endif %}
+{% endblock %}

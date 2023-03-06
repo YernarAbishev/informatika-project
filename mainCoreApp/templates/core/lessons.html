@@ -1,0 +1,25 @@
+{% extends '../base.html' %}
+
+{% block title %}{{ course.courseName }} курс бойынша сабақтар.{% endblock %}
+
+{% block content %}
+    {% if user.is_authenticated %}
+    <div class="container">
+        <div class="modules">
+            <h2 class="subtitle">{{ course.courseName }} курс бойынша сабақтар тізімі.</h2>
+            {% for lesson in lessons %}
+            <a href="{% url 'lessonDetail' pk=lesson.pk %}" class="module-item">{{ forloop.counter }}. {{ lesson.lessonName }}</a>
+            {% endfor %}
+        </div>
+    </div>
+    {% else %}
+    <div class="courses">
+        <div class="container">
+            <div class="message-danger">
+                <h1>Хабарлама</h1>
+                <p>Курстарды қарау үшін платформаға тіркеліңіз немесе кіріңіз</p>
+            </div>
+        </div>
+    </div>
+    {% endif %}
+{% endblock %}

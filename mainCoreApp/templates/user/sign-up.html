@@ -1,0 +1,20 @@
+{% extends '../base.html' %}
+{% load crispy_forms_tags %}
+{% block title %}Жүйеге тіркелу{% endblock %}
+
+{% block content %}
+    <div class="container">
+        <div class="modules">
+            <div class="card">
+                <div class="card-body">
+                    <h1>Платформаға тіркелу</h1>
+                    <form method="post">
+                        {% csrf_token %}
+                        {{ form|crispy }}
+                        <button class="primary button">Тіркелу</button>
+                    </form>
+                </div>
+            </div>
+        </div>
+    </div>
+{% endblock %}

@@ -1,0 +1,49 @@
+{% extends '../base.html' %}
+
+{% block title %}{{ course.courseName }}{% endblock %}
+
+{% block content %}
+    {% if user.is_authenticated %}
+    <div class="course-detail">
+        <div class="container">
+            <div class="course-card-detail">
+                <div class="row">
+                    <div class="col-6">
+                        <img src="{{ course.courseLogo.url }}" alt="{{ course.courseName }}">
+                        <h1>{{ course.courseName }}</h1>
+                        <p>Курстың сипаттамасы: {{ course.courseDescription }}</p>
+                        <p class="course-detail-category">{{ course.category.categoryName }}</p>
+                    </div>
+                    <div class="col-1"></div>
+                    <div class="col-5">
+                        <div class="row">
+                            <div class="col-6 mb-5 requirements">
+                                <h3>Жас</h3>
+                                <h4>{{ course.courseAge }}+</h4>
+                            </div>
+                            <div class="col-6 mb-5 requirements">
+                                <h3>Талаптар</h3>
+                                <h4>ДК, интернет</h4>
+                            </div>
+                            <div class="col-6 mb-5 requirements">
+                                <h3>Деңгей</h3>
+                                <h4>{{ course.level }}</h4>
+                            </div>
+                        </div>
+                        <a href="{% url 'lessonsList' slug=course.slug %}" class="primary button d-block" style="text-align: center;">Курсты оқу</a>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    {% else %}
+    <div class="courses">
+        <div class="container">
+            <div class="message-danger">
+                <h1>Хабарлама</h1>
+                <p>Курстарды қарау үшін платформаға тіркеліңіз немесе кіріңіз</p>
+            </div>
+        </div>
+    </div>
+    {% endif %}
+{% endblock %}

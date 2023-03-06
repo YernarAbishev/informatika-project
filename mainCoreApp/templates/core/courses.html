@@ -1,0 +1,55 @@
+{% extends '../base.html' %}
+
+{% block title %}Курстар{% endblock %}
+
+{% block content %}
+    {% if user.is_authenticated %}
+    <div class="courses">
+        <div class="container">
+            <div class="row">
+                <div class="col-md-4">
+                    <h2 class="mb-4">Курсты іздеу.</h2>
+                    <form action="{% url 'courses' %}" class="search-form">
+                        <div class="row">
+                            <div class="col-8">
+                                <input type="search" name="search" class="form-control" placeholder="Курс атауы">
+                            </div>
+                            <div class="col-3">
+                                <button class="search-button"><ion-icon name="search"></ion-icon></button>
+                            </div>
+                        </div>
+                    </form>
+                    <h2>Категориялар.</h2>
+                    <a href="{% url 'courses' %}" class="category-filter">Барлық курстар</a>
+                    {% for category in categories %}
+                    <a href="{% url 'coursesFilter' slug=category.slug %}" class="category-filter">{{ category.categoryName }}</a>
+                    {% endfor %}
+                </div>
+                <div class="col-md-8">
+                    <div class="row">
+                        {% for course in courses %}
+                        <div class="col-md-6 mb-4">
+                            <a href="{% url 'courseDetail' slug=course.slug %}" class="course-card">
+                                <img src="{{ course.courseLogo.url }}" alt="{{ course.courseName }}">
+                                <h3>{{ course.courseName }}</h3>
+                                <p>{{ course.courseDescription }}</p>
+                                <p class="category-tag">{{ course.category.categoryName }}</p>
+                            </a>
+                        </div>
+                        {% endfor %}
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    {% else %}
+    <div class="courses">
+        <div class="container">
+            <div class="message-danger">
+                <h1>Хабарлама</h1>
+                <p>Курстарды қарау үшін платформаға тіркеліңіз немесе кіріңіз</p>
+            </div>
+        </div>
+    </div>
+    {% endif %}
+{% endblock %}
