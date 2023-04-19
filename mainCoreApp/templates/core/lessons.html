@@ -8,7 +8,7 @@
         <div class="modules">
             <h2 class="subtitle">{{ course.courseName }} курс бойынша сабақтар тізімі.</h2>
             {% for lesson in lessons %}
-            <a href="{% url 'lessonDetail' pk=lesson.pk %}" class="module-item">{{ forloop.counter }}. {{ lesson.lessonName }}</a>
+            <a href="{{ lesson.pk }}" class="module-item">{{ forloop.counter }}. {{ lesson.lessonName }}</a>
             {% endfor %}
         </div>
     </div>

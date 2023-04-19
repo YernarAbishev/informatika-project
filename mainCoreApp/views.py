@@ -34,18 +34,25 @@ def courseDetail(request, slug):
         'course': course,
     })
 
-def lessonsList(request, slug):
+def lessonsList(request, slug=None):
     course = get_object_or_404(Course, slug=slug)
     lessons = Lesson.objects.all()
+    if slug:
+        course = get_object_or_404(Course, slug=slug)
+        lessons = lessons.filter(course=course)
     return render(request, "core/lessons.html", {
         'course': course,
         'lessons': lessons
     })
 
-def lessonDetail(request, pk):
-    lessons = Lesson.objects.all()
+def lessonDetail(request, slug, pk):
+    course = get_object_or_404(Course, slug=slug)
     lesson = get_object_or_404(Lesson, pk=pk)
+    lessons = Lesson.objects.all()
+    if slug:
+        lessons = lessons.filter(course=course)
     return render(request, "core/lesson-detail.html", {
+        'course': course,
         'lesson': lesson,
         'lessons': lessons,
     })

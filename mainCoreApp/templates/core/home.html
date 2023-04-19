@@ -5,9 +5,19 @@
 {% block content %}
     <div class="container">
         <div class="main">
+            {% if messages %}
+            <div id="alert" style="width: 50%; margin: 0 auto;">
+                <div class="alert alert-primary alert-dismissible fade show" role="alert">
+                    {% for message in messages %}
+                        {{ message }}
+                    {% endfor %}
+                  <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
+                </div>
+            </div>
+            {% endif %}
             <h1 class="title"><span class="light-bg">Informatika.</span> <span class="primary-bg">Оқу платформасы.</span></h1>
             <p class="mb-4">Біз балаларға жаңа цифрлық шындықты шарлауға және өздерінің бағдарламалық өнімдерін жасауға көмектесетін көптеген сандық дағдыларды үйретеміз.</p>
-            <a href="#" class="primary button">Курстар</a>
+            <a href="{% url 'courses' %}" class="primary button">Курстар</a>
         </div>
     </div>
 

@@ -6,7 +6,7 @@
     {% if user.is_authenticated %}
     <div class="lesson-detail">
         <div class="container">
-            <p><a href="#">Артқа</a> / {{ module.moduleName }}</p>
+            <p><a style="text-decoration: none;" href="/course/detail/{{course.slug}}/lessons/">Артқа</a> / {{ lesson.lessonName }}</p>
             <div class="row">
                 <div class="col-md-7">
                     {% if lesson.videoLesson %}
@@ -25,7 +25,7 @@
                 <div class="col-md-5">
                     <h2>Сабақтар</h2>
                     {% for l in lessons %}
-                    <a href="{% url 'lessonDetail' pk=l.pk %}" class="category-filter">{{ forloop.counter }}. {{ l.lessonName }}</a>
+                    <a href="{% url 'courseDetail' slug=l.course.slug %}lessons/{{l.pk}}" class="category-filter">{{ forloop.counter }}. {{ l.lessonName }}</a>
                     {% endfor %}
                 </div>
             </div>
